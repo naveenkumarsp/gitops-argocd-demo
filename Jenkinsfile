@@ -50,11 +50,11 @@ spec:
       }
       steps {
         container('tools') {
-          sh "git clone https://$GIT_CREDS_USR:$GIT_CREDS_PSW@github.com/naveenkumarsp/argocd-demo-deploy.git"
+          sh "git clone https://$GIT_CREDS_USR:$GIT_CREDS_PSW@github.com/naveenkumarsp/gitops-argocd-demo-deploy.git"
           sh "git config --global user.email 'naveenkumarsp@live.com'"
 
           dir("argocd-demo-deploy") {
-            sh "cd ./e2e && kustomize edit set image naveenkumarsp/argocd-demo:${env.GIT_COMMIT}"
+            sh "cd ./e2e && kustomize edit set image naveenkumarsp/gitops-argocd-demo:${env.GIT_COMMIT}"
             sh "git commit -am 'Publish new version' && git push || echo 'no changes'"
           }
         }
